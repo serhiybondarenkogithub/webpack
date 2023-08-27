@@ -1,18 +1,21 @@
 const common = require("./webpack.common.config");
 const { merge } = require("webpack-merge");
 const path = require("path");
+const webpack = require("webpack");
 
 
 module.exports = merge(common, {
 	mode: "development",
+	entry: "./src/js/index-dev.js",
 	output: {
 		filename: "bundle.js",
+		publicPath: "/static/",
 	},
 	devtool: "eval-source-map",
 	devServer: {
 		port: 9000,
 		static: {
-			directory: path.resolve(__dirname, ".."),
+			directory: path.resolve(__dirname, "../dist"),
 		},
 		devMiddleware: {
 			index: "index.html",
@@ -43,4 +46,7 @@ module.exports = merge(common, {
 			},
 		],
 	},
+	plugins: [
+		new webpack.HotModuleReplacementPlugin(),
+	],
 });

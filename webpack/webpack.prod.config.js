@@ -6,11 +6,14 @@ const glob = require("glob");
 const path = require("path");
 const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 
 module.exports = merge(common, {
+	entry: "./src/js/index.js",
 	output: {
 		filename: "js/[name].[contenthash:12].js",
+		publicPath: "/static/",
 	},
 	mode: "production",
 	devtool: "source-map",
@@ -148,6 +151,10 @@ module.exports = merge(common, {
 				`${path.join(__dirname, "../src")}/**/*`,
 				{ nodir: true }
 			),
+		}),
+		new CompressionPlugin({
+			algorithm: "gzip",
+			test: /\.(js|css)/,
 		}),
 	],
 });
