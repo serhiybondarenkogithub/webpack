@@ -73,15 +73,46 @@ module.exports = merge(common, {
 				],
 			}),
 		],
+		runtimeChunk: "single",
 		splitChunks: {
+			chunks: "all",
+			maxSize: Infinity,
+			minSize: 2_000,
 			cacheGroups: {
 				bootstrap: {
 					test: /[\\/]node_modules[\\/]bootstrap[\\/]/,
-					chunks: "initial",
 					name: "bootstrap",
 				},
+				node_modules: {
+					test: /[\\/]node_modules[\\/]/,
+					name: "node_modules",
+					chunks: "initial",
+				},
+				// async: {
+				// 	test: /[\\/]node_modules[\\/]/,
+				// 	chunks: "async",
+				// 	name(module, chunks) {
+				// 		return chunks.map(chunk => chunk.name).join("-");
+				// 	} 
+				// }
 			},
 		},
+		// splitChunks: {
+		// 	chunks: "all",
+		// 	maxSize: Infinity,
+		// 	minSize: 0,
+		// 	cacheGroups: {
+		// 		node_modules: {
+		// 			test: /[\\/]node_modules[\\/]/,
+		// 			name(module) {
+		// 				const packageName = module.context.match(
+		// 					/[\\/]node_modules[\\/](.*?)([\\/]|$)/
+		// 				)[1];
+		// 				return packageName;
+		// 			}
+		// 		},
+		// 	},
+		// },
 	},
 	module: {
 		rules: [
