@@ -1,3 +1,4 @@
+@import "./vendors.scss";
 @import "variables";
 
 * {
@@ -11,12 +12,11 @@ html, body {
     background-color: $body-background-color;
     color: $font-color;
     font-weight: 300;
-
-    
 }
 
 .header-image {
     width: 100%;
+    object-fit: cover;
     object-fit: cover;
     height: 200px;
 }
@@ -101,7 +101,7 @@ h1 {
                 margin-right: 10px;
                 cursor: pointer;
                 visibility: hidden;
-                /* background: url("../../images/delete.png") center no-repeat; */
+                background: url("../../images/delete.png") center no-repeat;
                 background-size: 90%;
             }
 

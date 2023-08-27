@@ -1,5 +1,6 @@
 import { renderTodos, clearNewTodoInput, getTodoId } from './ui';
 import { getAllTodos, addTodo, removeTodo, updateTodo } from './data';
+import { Modal } from "bootstrap";
 
 export function onLoadEventHandler() {
     renderTodos(getAllTodos())
@@ -17,9 +18,22 @@ export function newTodoEventHandler(event) {
 }
 
 export function removeTodoEventHandler(event) {
-    const id = getTodoId(event.target)
-    removeTodo(id)
+    const id = getTodoId(event.target);
+    document.querySelector("#modal-delete-button").setAttribute("todo-id", id);
+    const deleteTodoModal = Modal.getOrCreateInstance(
+        document.getElementById("modal-delete-todo")
+    );
+    deleteTodoModal.show();
+}
+
+export function confirmRemoveEventHandler(event) {
+    const id = document.getElementById("modal-delete-button").getAttribute("todo-id");
+    removeTodo(+id)
     renderTodos(getAllTodos())
+    const deleteTodoModal = Modal.getOrCreateInstance(
+        document.getElementById("modal-delete-todo")
+    );
+    deleteTodoModal.hide();
 }
 
 export function toggleTodoEventListener(event) {

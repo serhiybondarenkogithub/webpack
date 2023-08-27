@@ -14,14 +14,21 @@ const config = {
 				test: /\.html$/,
 				use: [ "html-loader" ],
 			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader",
+				},
+			}
 		],
 	},
 	plugins: [
+		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			filename: "index.html",
 			template: "./src/index.html",
 		}),
-		new CleanWebpackPlugin(),
 	],
 }
 

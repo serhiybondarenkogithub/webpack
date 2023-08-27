@@ -1,4 +1,4 @@
-import initialTodos from '../todos.json'
+import initialTodos from '../todos.json';
 
 let data = initialTodos
 
